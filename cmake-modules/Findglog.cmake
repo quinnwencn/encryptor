@@ -1,3 +1,10 @@
+if (APPLE) 
+    set(OPENSSL_ROOT_DIR /opt/homebrew/opt/openssl@3)
+    set(GLOG_ROOT_DIR /opt/homebrew)
+else()
+    set(GLOG_ROOT_DIR /usr)
+endif()
+
 find_path(GLOG_INCLUDE_DIR
     NAMES logging.h
     HINTS ${GLOG_ROOT_DIR}/include/glog)
