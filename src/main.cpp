@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
                 return 0;
             case 'h':
                 print_help();
-                break;
+                return 0;
             default:
                 std::cout << "Usage %s -b <path> -o <path>\n";
                 print_help();
