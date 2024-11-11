@@ -48,12 +48,12 @@ int main(int argc, char **argv) {
                 break;
             case 'v':
                 print_version();
-                break;
+                return 0;
             case 'h':
                 print_help();
                 break;
             default:
-                std::cout << "Usage %s -b <path> -c <path> -o <path>\n";
+                std::cout << "Usage %s -b <path> -o <path>\n";
                 print_help();
                 return 1;
         }
