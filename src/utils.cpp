@@ -59,7 +59,7 @@ bool Tlvs::writeToFile(const std::string& filename) {
 
     for (auto& tlv: tlvs_) {
         ofs.write(reinterpret_cast<char*>(&tlv.type_), sizeof(tlv.type_));
-        uint16_t length = static_cast<uint16_t>(tlv.value_.size());
+        uint32_t length = static_cast<uint32_t>(tlv.value_.size());
         ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));
         for (auto c: tlv.value_) {
             ofs << c;
