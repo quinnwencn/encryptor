@@ -17,7 +17,7 @@ void init(const char* logpath) {
     initLog(logpath);
 }
 
-int encrypt(const char* inputfile, const char* outputfile) {
+int encrypt(const char* inputfile, const char* outputfile, const char* certificate) {
     ssl::AesEncryptor encryptor;
     std::vector<uint8_t> iv;
     if (!ssl::generateRandom(16, iv)) {
@@ -49,7 +49,11 @@ int encrypt(const char* inputfile, const char* outputfile) {
         return -1;
     }
 
-    ssl::Certificate cert("/etc/secflash/secflash.pem");
+    const char* certi = "/etc/secflash/secflash.pem";
+    if (certificate != nullptr) {
+        certi = certificate;
+    }
+    ssl::Certificate cert(certi);
     std::vector<uint8_t> cipherkey;
     ssl::AsymCipher asym(cert.publicKey());
 

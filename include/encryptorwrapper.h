@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 void init(const char* logpath);
-int encrypt(const char* inputfile, const char* outputfile);
+int encrypt(const char* inputfile, const char* outputfile, const char* certificate = nullptr);
 
 #ifdef __cpluscplus
 }

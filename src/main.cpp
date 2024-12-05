@@ -13,6 +13,7 @@ void print_help() {
     std::cout << "Options:\n";
     std::cout << "    -b blackbox           path of blackbox\n";
     std::cout << "    -o output             path of output encrypted file\n";
+    std::cout << "    -c certificate        path of certificate to get public key\n";
     std::cout << "    -v version            encryptor version\n";
     std::cout << "    -h help               usage help\n";
 }
@@ -30,6 +31,7 @@ int main(int argc, char **argv) {
     struct option options[] = {
         {"blackbox", required_argument, NULL, 'b'},
         {"output", required_argument, NULL, 'o'},
+        {"certificate", required_argument, NULL, 'c'},
         {"version", no_argument, NULL, 'v'},
         {"help", no_argument, NULL, 'h'},
     };
@@ -38,13 +40,17 @@ int main(int argc, char **argv) {
     int index = -1;
     char* blackbox = nullptr;
     char* output = nullptr;
-    while ((opt = getopt_long(argc, argv, "b:o:v:h", options, &index)) != -1) {
+    char* certificate = nullptr;
+    while ((opt = getopt_long(argc, argv, "b:o:c:v:h", options, &index)) != -1) {
         switch (opt) {
             case 'b':
                 blackbox = optarg;
                 break;
             case 'o':
                 output = optarg;
+                break;
+            case 'c':
+                certificate = optarg;
                 break;
             case 'v':
                 print_version();
@@ -53,7 +59,7 @@ int main(int argc, char **argv) {
                 print_help();
                 return 0;
             default:
-                std::cout << "Usage %s -b <path> -o <path>\n";
+                std::cout << "Usage %s -b <path> -o <path> [-c <certificate>]\n";
                 print_help();
                 return 1;
         }
